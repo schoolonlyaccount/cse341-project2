@@ -1,0 +1,22 @@
+{
+  "name": "cse341-project2",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/schoolonlyaccount/cse341-project2#readme",
+  "bugs": {
+    "url": "https://github.com/schoolonlyaccount/cse341-project2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schoolonlyaccount/cse341-project2.git"
+  },
+  "author": "Kell Brine",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
