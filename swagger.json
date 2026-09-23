@@ -1,0 +1,456 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Video Games & Developer API",
+    "description": "A RESTful API for managing and retrieving information about video games and their developers.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Video Games",
+      "description": "Operations for managing video game information."
+    },
+    {
+      "name": "Developers",
+      "description": "Operations for managing video game developer information."
+    }
+  ],
+  "paths": {
+    "/videogames": {
+      "get": {
+        "tags": [
+          "Video Games"
+        ],
+        "summary": "Get all video games",
+        "description": "Retrieves a list of all video games in the database.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of video games.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VideoGame"
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieve video games."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Video Games"
+        ],
+        "summary": "Create a video game",
+        "description": "Adds a new video game to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Video game information.",
+            "schema": {
+              "$ref": "#/definitions/VideoGameInput"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Video game created successfully."
+          },
+          "400": {
+            "description": "Invalid video game data."
+          },
+          "500": {
+            "description": "Internal server error while creating the video game."
+          }
+        }
+      }
+    },
+    "/videogames/{id}": {
+      "get": {
+        "tags": [
+          "Video Games"
+        ],
+        "summary": "Get a video game by ID",
+        "description": "Retrieves a single video game using its MongoDB document ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the video game.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Video game retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/VideoGame"
+            }
+          },
+          "400": {
+            "description": "Invalid video game ID."
+          },
+          "404": {
+            "description": "Video game not found."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Video Games"
+        ],
+        "summary": "Update a video game",
+        "description": "Replaces an existing video game with the supplied information.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the video game.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Updated video game information.",
+            "schema": {
+              "$ref": "#/definitions/VideoGameInput"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Video game updated successfully."
+          },
+          "400": {
+            "description": "Invalid video game ID or data."
+          },
+          "404": {
+            "description": "Video game not found."
+          },
+          "500": {
+            "description": "Internal server error while updating the video game."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Video Games"
+        ],
+        "summary": "Delete a video game",
+        "description": "Deletes a video game from the database using its MongoDB document ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the video game.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Video game deleted successfully."
+          },
+          "400": {
+            "description": "Invalid video game ID."
+          },
+          "404": {
+            "description": "Video game not found."
+          },
+          "500": {
+            "description": "Internal server error while deleting the video game."
+          }
+        }
+      }
+    },
+    "/developers": {
+      "get": {
+        "tags": [
+          "Developers"
+        ],
+        "summary": "Get all developers",
+        "description": "Retrieves a list of all video game developers in the database.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of developers.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Developer"
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to retrieve developers."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Developers"
+        ],
+        "summary": "Create a developer",
+        "description": "Adds a new video game developer to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Developer information.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperInput"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Developer created successfully."
+          },
+          "400": {
+            "description": "Invalid developer data."
+          },
+          "500": {
+            "description": "Internal server error while creating the developer."
+          }
+        }
+      }
+    },
+    "/developers/{id}": {
+      "get": {
+        "tags": [
+          "Developers"
+        ],
+        "summary": "Get a developer by ID",
+        "description": "Retrieves a single developer using its MongoDB document ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the developer.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Developer retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/Developer"
+            }
+          },
+          "400": {
+            "description": "Invalid developer ID."
+          },
+          "404": {
+            "description": "Developer not found."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Developers"
+        ],
+        "summary": "Update a developer",
+        "description": "Replaces an existing developer with the supplied information.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the developer.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Updated developer information.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperInput"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Developer updated successfully."
+          },
+          "400": {
+            "description": "Invalid developer ID or data."
+          },
+          "404": {
+            "description": "Developer not found."
+          },
+          "500": {
+            "description": "Internal server error while updating the developer."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Developers"
+        ],
+        "summary": "Delete a developer",
+        "description": "Deletes a developer from the database using its MongoDB document ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "MongoDB ObjectId of the developer.",
+            "type": "string",
+            "example": "65a1b2c3d4e5f67890123456"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Developer deleted successfully."
+          },
+          "400": {
+            "description": "Invalid developer ID."
+          },
+          "404": {
+            "description": "Developer not found."
+          },
+          "500": {
+            "description": "Internal server error while deleting the developer."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VideoGameInput": {
+      "type": "object",
+      "required": [
+        "title",
+        "developer",
+        "genre",
+        "release_date",
+        "price",
+        "platforms",
+        "gameplay_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "The Legend of Zelda: Breath of the Wild"
+        },
+        "developer": {
+          "type": "string",
+          "example": "Nintendo"
+        },
+        "genre": {
+          "type": "string",
+          "example": "Action-Adventure"
+        },
+        "release_date": {
+          "type": "string",
+          "example": "03/03/2017"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "minimum": 0,
+          "example": 59.99
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Nintendo Switch",
+            "Wii U"
+          ]
+        },
+        "gameplay_type": {
+          "type": "string",
+          "example": "Single-player"
+        }
+      }
+    },
+    "VideoGame": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoGameInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "65a1b2c3d4e5f67890123456"
+            }
+          }
+        }
+      ]
+    },
+    "DeveloperInput": {
+      "type": "object",
+      "required": [
+        "name",
+        "country",
+        "founded",
+        "website"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Nintendo"
+        },
+        "country": {
+          "type": "string",
+          "example": "Japan"
+        },
+        "founded": {
+          "type": "integer",
+          "example": 1889
+        },
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "example": "https://www.nintendo.com"
+        }
+      }
+    },
+    "Developer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperInput"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "65a1b2c3d4e5f67890123456"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
