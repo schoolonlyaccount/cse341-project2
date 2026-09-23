@@ -5,10 +5,9 @@
     "description": "A RESTful API for managing and retrieving information about video games and their developers.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-project2-w6he.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "consumes": [
